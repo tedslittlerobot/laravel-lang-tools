@@ -1,0 +1,21 @@
+{
+    "name": "tlr/laravel-lang-utils",
+    "description": "",
+    "authors": [
+        {
+            "name": "Stef Horner",
+            "email": "stef@tedslittlerobot.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.1.x",
+        "symfony/console": "2.3.x"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tlr\\LaravelLangUtils\\": "src"
+        }
+    },
+    "minimum-stability": "dev"
+}
