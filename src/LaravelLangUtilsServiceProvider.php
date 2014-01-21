@@ -2,7 +2,7 @@
 
 use Illuminate\Support\ServiceProvider;
 
-class LaravelLangsServiceProvider extends ServiceProvider {
+class LaravelLangUtilsServiceProvider extends ServiceProvider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.
