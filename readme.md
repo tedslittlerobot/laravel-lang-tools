@@ -9,9 +9,9 @@ When dealing with agencies and companies who translate programming projects and 
 
 ### Installation
 
-Run the following to install the library.
+Add the following to your `composer.json`'s require object:
 
-`composer require tlr/laravel-lang-tools "1.x"`
+`"tlr/laravel-lang-tools": "1.x"`
 
 Then, add `Tlr\LaravelLangTools\LaravelLangToolsServiceProvider` to the `providers` array in `config/app.php`.
 
