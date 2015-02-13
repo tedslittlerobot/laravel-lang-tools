@@ -152,7 +152,8 @@ class ImportCommand extends Command {
 		$files->makeDirectory($path, 0777, true, true);
 		$this->info('Creating Directories...');
 
-		foreach ($langs as $slug => $data) {
+		foreach ($langs as $slug => $data)
+		{
 			$this->info("Unpacking Language: $slug");
 
 			$files->makeDirectory( "{$path}/{$slug}" );
