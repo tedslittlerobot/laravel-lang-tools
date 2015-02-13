@@ -50,10 +50,8 @@ class ImportCommand extends Command {
 	 * @param  string $path
 	 * @return array
 	 */
-	public function parseFile( $path )
+	public function parseFile( $file )
 	{
-		$file = $this->parsePath($path);
-
 		$rows = explode(PHP_EOL, $file);
 
 		$output = array();
