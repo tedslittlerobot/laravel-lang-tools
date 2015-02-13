@@ -28,7 +28,15 @@ class ImportCommand extends Command {
 	 */
 	public function fire()
 	{
-		$data = $this->hydrateArrays( $this->reformArrays( $this->parseFile( $this->argument('input') ) ) );
+		$file = $this->laravel['files']->get(
+			$this->parsePath( $this->argument('input') )
+		);
+
+		$data = $this->hydrateArrays(
+			$this->reformArrays(
+				$this->parseFile( $file )
+			)
+		);
 
 		$this->writeLangs( $data, $this->argument('output') );
 
@@ -44,7 +52,7 @@ class ImportCommand extends Command {
 	 */
 	public function parseFile( $path )
 	{
-		$file = $this->laravel['files']->get(base_path( $path ));
+		$file = $this->parsePath($path);
 
 		$rows = explode(PHP_EOL, $file);
 
@@ -61,6 +69,20 @@ class ImportCommand extends Command {
 		}
 
 		return $output;
+	}
+
+	/**
+	 * Allow for absolute and relative file paths
+	 *
+	 * @param  string $path
+	 * @return string
+	 */
+	public function parsePath( $path )
+	{
+		if ( substr($path, 0, 1) == '/' )
+			return realpath($path);
+
+		return realpath(base_path( $path ));
 	}
 
 	/**
