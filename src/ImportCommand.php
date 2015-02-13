@@ -161,7 +161,7 @@ class ImportCommand extends Command {
 			foreach ($data as $key => $items)
 			{
 				$this->comment("  - Writing Lang Namespace: $key");
-				$files->put( "{$path}/{$slug}/{$key}.php", View::make('support.lang', ['items' => $items])->render() );
+				$files->put( "{$path}/{$slug}/{$key}.php", View::make('laravel-lang-tools::lang', ['items' => $items])->render() );
 			}
 		}
 	}
