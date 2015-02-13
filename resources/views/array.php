@@ -14,7 +14,7 @@ for ( $xi=0; $xi < $level; $xi++ )
 
 ?>
 <?php echo $z; ?>array(
-@foreach( $items as $key => $item )
+<?php foreach( $items as $key => $item ): ?>
 <?php echo $z; ?>	"<?php echo e($key) ?>" => <?php echo  is_array($item) ? View::make('laravel-lang-tools::array', array('level' => $level + 1, 'items' => $item))->render() : '"'.e($item).'"' ; ?>,
-@endforeach
+<?php endforeach ?>
 <?php echo $z; ?>)
