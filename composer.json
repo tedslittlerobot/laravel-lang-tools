@@ -1,6 +1,6 @@
 {
-    "description": "",
     "name": "tlr/laravel-lang-tools",
+    "description": "Some Language Import/Export tools for Laravel",
     "authors": [
         {
             "name": "Stef Horner",

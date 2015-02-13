@@ -37,7 +37,8 @@ class ImportCommand extends Command {
 	}
 
 	/**
-	 * Parse the input file
+	 * Parse the input file from csv to php arrays
+	 *
 	 * @param  string $path
 	 * @return array
 	 */
@@ -49,6 +50,8 @@ class ImportCommand extends Command {
 
 		$output = array();
 
+		// @hack - something weird was happening with php's csv functions.
+		// This gets the job done!
 		foreach ($rows as $key => $row)
 		{
 			if ($row)
@@ -62,6 +65,12 @@ class ImportCommand extends Command {
 
 	/**
 	 * Separate the one dimentional, n-length arrays into n flattened arrays of rows
+	 *
+	 * The input is csv-like data in rows, with a header row describing the columns
+	 * The output is a key-value array of head header to an array with each row's value for it
+	 *
+	 * The first column is the key, and all subsequent columns are language keys
+	 *
 	 * @param  array $rows
 	 * @return array
 	 */
@@ -69,17 +78,23 @@ class ImportCommand extends Command {
 	{
 		$output = array();
 
+		// get the header row from the input
 		$headers = array_splice($rows, 0, 1)[0];
 
+		// $xi = 1 - skip the first column, as it's the lang key
 		for ($xi=1; $xi < count($headers); $xi++)
 		{
 			$lang = array();
 
+			// get the cells for that header
 			foreach ($rows as $key => $value)
 			{
+				// $value[0] is the lang key
+				// $value[$xi] is the translation of that key for the $xi'th language column
 				$lang[$value[0]] = array_get($value, $xi);
 			}
 
+			// add the header and its data to the output array
 			$output[$headers[$xi]] = $lang;
 		}
 
@@ -87,7 +102,8 @@ class ImportCommand extends Command {
 	}
 
 	/**
-	 * hydrate a collection of arrays
+	 * Hydrate a collection of arrays
+	 *
 	 * @param  array $langs
 	 * @return array
 	 */
@@ -105,6 +121,7 @@ class ImportCommand extends Command {
 
 	/**
 	 * Hydrate a single array from flattened dot notation
+	 *
 	 * @param  array $array
 	 * @return array
 	 */
@@ -124,6 +141,7 @@ class ImportCommand extends Command {
 
 	/**
 	 * Unflatten a single key value pair
+	 *
 	 * @param  array $keys
 	 * @param  mixed $value
 	 * @return array
@@ -131,6 +149,7 @@ class ImportCommand extends Command {
 	public function unFlatten( $keys, $value )
 	{
 		$key = array_shift($keys);
+
 		if ( empty($keys) )
 		{
 			return array( $key => $value );
@@ -141,6 +160,7 @@ class ImportCommand extends Command {
 
 	/**
 	 * Write the lang files to the given directory
+	 *
 	 * @param  array $langs
 	 * @param  string $output
 	 */
@@ -152,6 +172,8 @@ class ImportCommand extends Command {
 		$files->makeDirectory($path, 0777, true, true);
 		$this->info('Creating Directories...');
 
+		// loop over each language, creating a directory for each one, and fill it
+		// with lang files and lines
 		foreach ($langs as $slug => $data)
 		{
 			$this->info("Unpacking Language: $slug");
@@ -161,7 +183,10 @@ class ImportCommand extends Command {
 			foreach ($data as $key => $items)
 			{
 				$this->comment("  - Writing Lang Namespace: $key");
-				$files->put( "{$path}/{$slug}/{$key}.php", View::make('support.lang', ['items' => $items])->render() );
+				$files->put(
+					"{$path}/{$slug}/{$key}.php",
+					View::make('support.lang', ['items' => $items])->render()
+				);
 			}
 		}
 	}
