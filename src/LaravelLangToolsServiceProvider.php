@@ -1,8 +1,8 @@
-<?php namespace Tlr\LaravelLangUtils;
+<?php namespace Tlr\LaravelLangTools;
 
 use Illuminate\Support\ServiceProvider;
 
-class LaravelLangUtilsServiceProvider extends ServiceProvider {
+class LaravelLangToolsServiceProvider extends ServiceProvider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.
@@ -18,7 +18,7 @@ class LaravelLangUtilsServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->commands(['Tlr\LaravelLangUtils\ImportCommand', 'Tlr\LaravelLangUtils\ExportCommand']);
+		$this->commands(['Tlr\LaravelLangTools\ImportCommand', 'Tlr\LaravelLangTools\ExportCommand']);
 	}
 
 	/**

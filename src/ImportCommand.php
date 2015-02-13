@@ -1,4 +1,4 @@
-<?php namespace Tlr\LaravelLangUtils;
+<?php namespace Tlr\LaravelLangTools;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Console\Command;

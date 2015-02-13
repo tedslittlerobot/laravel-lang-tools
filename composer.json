@@ -1,6 +1,6 @@
 {
-    "name": "tlr/laravel-lang-utils",
     "description": "",
+    "name": "tlr/laravel-lang-tools",
     "authors": [
         {
             "name": "Stef Horner",
@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Tlr\\LaravelLangUtils\\": "src"
+            "Tlr\\LaravelLangTools\\": "src"
         }
     },
     "minimum-stability": "dev"
